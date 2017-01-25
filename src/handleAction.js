@@ -23,8 +23,8 @@ export default function handleAction(actionType, reducer = identity, defaultStat
     : [reducer.next, reducer.throw].map(aReducer => (isNil(aReducer) ? identity : aReducer));
 
   return (state = defaultState, action) => {
-    const { type } = action;
-    if (type && !includes(actionTypes, type.toString())) {
+    const { type = ''} = action;
+    if (!!type || !includes(actionTypes, type.toString())) {
       return state;
     }
 
